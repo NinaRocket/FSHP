@@ -5,6 +5,8 @@ const exphbs = require("express-handlebars");
 //instance of express app
 const app = express();
 
+app.use(express.static("public"));
+
 //port and process.env.PORT for Heroku
 const PORT = process.env.PORT || 8080;
 
@@ -16,6 +18,9 @@ app.get("/", function (req, res) {
   res.render("index");
 });
 
+app.get("/about", function (req, res) {
+  res.render("about");
+});
 //Start server
 app.listen(PORT, function () {
   console.log("Server listening on: http://localhost:" + PORT);
