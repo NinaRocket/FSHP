@@ -1,8 +1,19 @@
 //Dependencies
 const express = require("express");
 const exphbs = require("express-handlebars");
-const db = require("monk")("localhost:27017/fshp");
-const userData = monk.get("user-data");
+const monk = require("monk");
+const db = monk("localhost:27017/fshp");
+const userData = db.get("user-data");
+
+const test = db.get("tests");
+
+db.then(() => {
+  console.log("connected to monk server");
+});
+test
+  .insert({ title: "introduction" })
+  .catch((err) => console.log(err))
+  .then(() => db.close);
 
 //instance of express app
 const app = express();
